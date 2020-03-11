@@ -5,7 +5,14 @@ import pandas as pd
 from PyQt5.QtWidgets import (QWidget, QLabel, 
     QComboBox, QApplication, QPushButton)
 import sys
-import os
+import os, sys, subprocess
+
+def open_file(filename):
+    if sys.platform == "win32":
+        os.startfile(filename)
+    else:
+        opener ="open" if sys.platform == "darwin" else "xdg-open"
+        subprocess.call([opener, filename])
 
 grad_file = 'Graduation data.xls'
 reg_file = 'Reg data (1140).xls'
@@ -169,7 +176,8 @@ class Example(QWidget):
         if self.selected_sem != 0:
             grad_in_sem = grad_data[grad_data["semester.1"]==self.selected_sem]
             grad_in_sem.to_excel("output.xlsx", index=False)
-            os.system('libreoffice --calc output.xlsx')
+            # os.system('libreoffice --calc output.xlsx')
+            open_file('output.xlsx')
                 
 if __name__ == '__main__':
     
