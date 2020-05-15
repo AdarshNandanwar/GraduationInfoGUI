@@ -19,16 +19,14 @@ reg_file = 'Reg data (1140).xls'
 grad_data = pd.read_excel(grad_file, sheet_name = 0)
 reg_data = pd.read_excel(reg_file, sheet_name = 0)
 
-class Example(QWidget):
+class MainBox(QWidget):
     selected_sem = 0
     
     def __init__(self):
         super().__init__()
-        
         self.initUI()
         
-        
-    def initUI(self):      
+    def initUI(self):
 
         self.lbl_col1 = QLabel("Registered", self)
         self.lbl_col2 = QLabel("Graduated", self)
@@ -84,7 +82,6 @@ class Example(QWidget):
         self.setGeometry(300, 300, 450, 450)
         self.setWindowTitle('Python GUI')
         self.show()
-        
         
     def onActivated(self, text):
         if text == "Select Semester":
@@ -170,7 +167,6 @@ class Example(QWidget):
                         count_grad_313 = count_grad_313 + 1
             self.lbl_grad_313_count.setText(str(count_grad_313))
             self.lbl_grad_313_count.adjustSize() 
-        
     
     def on_click(self):
         if self.selected_sem != 0:
@@ -182,5 +178,5 @@ class Example(QWidget):
 if __name__ == '__main__':
     
     app = QApplication(sys.argv)
-    ex = Example()
+    ex = MainBox()
     sys.exit(app.exec_())
